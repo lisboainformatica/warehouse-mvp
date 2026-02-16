@@ -1,4 +1,4 @@
-"use client";
+Ôªø"use client";
 
 import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
@@ -41,7 +41,7 @@ export function ReportFilters({
         setLoading(true);
 
         if (reportType === "movements" && (!startDate || !endDate)) {
-            toast.error("Selecione o perÌodo inicial e final.");
+            toast.error("Selecione o per√≠odo inicial e final.");
             setLoading(false);
             return;
         }
@@ -66,20 +66,20 @@ export function ReportFilters({
     return (
         <Card className="mb-6 print:hidden">
             <CardHeader>
-                <CardTitle>Filtros do RelatÛrio</CardTitle>
+                <CardTitle>Filtros do Relat√≥rio</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
                     <div className="space-y-2">
-                        <Label>Tipo de RelatÛrio</Label>
+                        <Label>Tipo de Relat√≥rio</Label>
                         <Select value={reportType} onValueChange={(v: any) => setReportType(v)}>
                             <SelectTrigger>
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="movements">HistÛrico de MovimentaÁıes</SelectItem>
-                                <SelectItem value="stock">PosiÁ„o de Estoque</SelectItem>
+                                <SelectItem value="movements">Hist√≥rico de Movimenta√ß√µes</SelectItem>
+                                <SelectItem value="stock">Posi√ß√£o de Estoque</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -95,13 +95,13 @@ export function ReportFilters({
                                 <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                             </div>
                             <div className="space-y-2">
-                                <Label>Usu·rio</Label>
+                                <Label>Usu√°rio</Label>
                                 <Select value={userId} onValueChange={setUserId}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Todos" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="ALL">Todos os Usu·rios</SelectItem>
+                                        <SelectItem value="ALL">Todos os Usu√°rios</SelectItem>
                                         {users.map((u) => (
                                             <SelectItem key={u._id} value={u._id}>{u.name}</SelectItem>
                                         ))}
@@ -109,7 +109,7 @@ export function ReportFilters({
                                 </Select>
                             </div>
                             <div className="space-y-2">
-                                <Label>Tipo de OperaÁ„o</Label>
+                                <Label>Tipo de Opera√ß√£o</Label>
                                 <Select value={movementType} onValueChange={setMovementType}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Todas" />
@@ -117,7 +117,7 @@ export function ReportFilters({
                                     <SelectContent>
                                         <SelectItem value="ALL">Todas</SelectItem>
                                         <SelectItem value="IN">Entrada</SelectItem>
-                                        <SelectItem value="OUT">SaÌda</SelectItem>
+                                        <SelectItem value="OUT">Sa√≠da</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
@@ -160,7 +160,7 @@ export function ReportFilters({
                         </Button>
                         <Button onClick={handleSearch} disabled={loading}>
                             {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Search className="mr-2 h-4 w-4" />}
-                            Gerar RelatÛrio
+                            Gerar Relat√≥rio
                         </Button>
                     </div>
                 </div>

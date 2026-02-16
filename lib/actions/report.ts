@@ -1,4 +1,4 @@
-"use server";
+ï»¿"use server";
 
 import dbConnect from "@/lib/db";
 import Movement from "@/models/Movement";
@@ -22,7 +22,7 @@ export async function getReportData(filters: {
     try {
         if (filters.type === "movements") {
             if (!filters.startDate || !filters.endDate) {
-                return { error: "Período é obrigatório para relatório de movimentações." };
+                return { error: "PerÃ­odo Ã© obrigatÃ³rio para relatÃ³rio de movimentaÃ§Ãµes." };
             }
 
             // Parse dates as local time by appending T00:00:00, preventing UTC shift
@@ -87,6 +87,6 @@ export async function getReportData(filters: {
         return { data: [], type: "unknown" };
     } catch (error) {
         console.error("Error generating report:", error);
-        return { error: "Erro ao gerar relatório. Tente novamente mais tarde." };
+        return { error: "Erro ao gerar relatÃ³rio. Tente novamente mais tarde." };
     }
 }
