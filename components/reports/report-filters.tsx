@@ -24,7 +24,7 @@ export function ReportFilters({
 }: {
     users: any[],
     categories: any[],
-    onSearch: (filters: any) => void
+    onSearch: (filters: any) => Promise<void>
 }) {
     const [loading, setLoading] = useState(false);
     const [reportType, setReportType] = useState<"movements" | "stock">("movements");
@@ -37,16 +37,16 @@ export function ReportFilters({
     const [movementType, setMovementType] = useState("ALL");
     const [stockFilter, setStockFilter] = useState("ALL");
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
         setLoading(true);
 
         if (reportType === "movements" && (!startDate || !endDate)) {
-            toast.error("Selecione o perÃ­odo inicial e final.");
+            toast.error("Selecione o período inicial e final.");
             setLoading(false);
             return;
         }
 
-        onSearch({
+        await onSearch({
             type: reportType,
             startDate,
             endDate,
@@ -56,8 +56,7 @@ export function ReportFilters({
             stockFilter
         });
 
-        // Simulate slight delay/loading finish (actual data fetch happens in parent)
-        setTimeout(() => setLoading(false), 500);
+        setLoading(false);
     };
 
     const handlePrint = () => {
@@ -67,20 +66,20 @@ export function ReportFilters({
     return (
         <Card className="mb-6 print:hidden">
             <CardHeader>
-                <CardTitle>Filtros do RelatÃ³rio</CardTitle>
+                <CardTitle>Filtros do Relatório</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
                     <div className="space-y-2">
-                        <Label>Tipo de RelatÃ³rio</Label>
+                        <Label>Tipo de Relatório</Label>
                         <Select value={reportType} onValueChange={(v: any) => setReportType(v)}>
                             <SelectTrigger>
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="movements">HistÃ³rico de MovimentaÃ§Ãµes</SelectItem>
-                                <SelectItem value="stock">PosiÃ§Ã£o de Estoque</SelectItem>
+                                <SelectItem value="movements">Histórico de Movimentações</SelectItem>
+                                <SelectItem value="stock">Posição de Estoque</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -96,13 +95,13 @@ export function ReportFilters({
                                 <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                             </div>
                             <div className="space-y-2">
-                                <Label>UsuÃ¡rio</Label>
+                                <Label>Usuário</Label>
                                 <Select value={userId} onValueChange={setUserId}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Todos" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="ALL">Todos os UsuÃ¡rios</SelectItem>
+                                        <SelectItem value="ALL">Todos os Usuários</SelectItem>
                                         {users.map((u) => (
                                             <SelectItem key={u._id} value={u._id}>{u.name}</SelectItem>
                                         ))}
@@ -110,7 +109,7 @@ export function ReportFilters({
                                 </Select>
                             </div>
                             <div className="space-y-2">
-                                <Label>Tipo de OperaÃ§Ã£o</Label>
+                                <Label>Tipo de Operação</Label>
                                 <Select value={movementType} onValueChange={setMovementType}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Todas" />
@@ -118,7 +117,7 @@ export function ReportFilters({
                                     <SelectContent>
                                         <SelectItem value="ALL">Todas</SelectItem>
                                         <SelectItem value="IN">Entrada</SelectItem>
-                                        <SelectItem value="OUT">SaÃ­da</SelectItem>
+                                        <SelectItem value="OUT">Saída</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
@@ -161,7 +160,7 @@ export function ReportFilters({
                         </Button>
                         <Button onClick={handleSearch} disabled={loading}>
                             {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Search className="mr-2 h-4 w-4" />}
-                            Gerar RelatÃ³rio
+                            Gerar Relatório
                         </Button>
                     </div>
                 </div>
