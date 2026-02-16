@@ -1,0 +1,98 @@
+# Sistema de Gestão de Almoxarifado (MVP)
+
+Sistema de Gestão de Almoxarifado desenvolvido com foco em agilidade, controle de estoque e relatórios precisos. Construído com tecnologias modernas para alta performance e escalabilidade.
+
+##  Funcionalidades Principais
+
+*   **Controle de Acesso:** Sistema de login seguro com níveis de acesso (Administrador e Usuário Comum).
+*   **Cadastros Completos:**
+    *   **Fornecedores:** Gestão detalhada com Razão Social, CNPJ e contato.
+    *   **Categorias:** Organização de itens por categorias.
+    *   **Itens:** Cadastro com controle de estoque mínimo e unidades de medida.
+*   **Movimentações de Estoque:**
+    *   Entradas e Saídas rápidas.
+    *   Cálculo automático de saldo de estoque.
+    *   **Admin:** Permissão para editar ou excluir movimentações com reversão automática de saldo.
+*   **Relatórios Avançados:**
+    *   Histórico de Movimentações (filtro por data, tipo, usuário, etc.).
+    *   Posição de Estoque (Geral ou Baixo Estoque).
+    *   **Exportação:** Impressão profissional e "Salvar como PDF".
+*   **Dashboard:** Visão geral com indicadores de itens, valor total e alertas de estoque baixo.
+
+##  Tecnologias Utilizadas
+
+*   **Frontend:** [Next.js 16](https://nextjs.org/) (App Router), React 19, [Tailwind CSS 4](https://tailwindcss.com/).
+*   **UI Components:** [Shadcn/UI](https://ui.shadcn.com/) para interface moderna e acessível.
+*   **Ícones:** [Lucide React](https://lucide.dev/).
+*   **Gráficos:** [Recharts](https://recharts.org/).
+*   **Notificações:** [Sonner](https://sonner.emilkowal.ski/).
+*   **Backend:** Next.js Server Actions (API-less architecture).
+*   **Banco de Dados:** [MongoDB](https://www.mongodb.com/) (com Mongoose).
+*   **Autenticação:** [NextAuth.js](https://next-auth.js.org/).
+*   **Validação:** Zod.
+
+##  Configuração e Instalação
+
+Siga os passos abaixo para rodar o projeto em sua máquina local.
+
+### Pré-requisitos
+*   Node.js (versão 20 ou superior recomendado para Next.js 16)
+*   Conta no MongoDB Atlas (ou MongoDB local)
+
+### Passo a Passo
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/lisboainformatica/warehouse-mvp.git
+    cd warehouse-mvp
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    # ou
+    yarn install
+    ```
+
+3.  **Configure as Variáveis de Ambiente:**
+    Crie um arquivo `.env.local` na raiz do projeto e preencha com suas credenciais:
+
+    ```env
+    # Conexão com o Banco de Dados (MongoDB)
+    MONGODB_URI=mongodb+srv://usuario:senha@cluster.mongodb.net/almoxarifado
+
+    # URL da Aplicação (Localhost para desenvolvimento)
+    # Em produção, use a URL do seu domínio (ex: https://meusistema.com)
+    NEXTAUTH_URL=http://localhost:3000
+
+    # Chave Secreta para criptografia de sessão (Gere uma string aleatória segura)
+    NEXTAUTH_SECRET=sua_chave_secreta_super_segura_aqui
+    ```
+
+4.  **Execute o Projeto:**
+    ```bash
+    npm run dev
+    ```
+
+5.  **Acesse o Sistema:**
+    Abra o navegador em http://localhost:3000
+
+### Carga Inicial de Dados (Seed)
+
+Para criar o primeiro usuário administrador, você pode acessar a rota de seed (se habilitada) ou inserir diretamente no banco de dados.
+
+O sistema verifica usuários na coleção `users`.
+*   **Senha padrão:** As senhas são hashadas.
+*   **Role:** Use "ADMIN" para acesso total.
+
+##  Estrutura do Projeto
+
+*   `/app`: Páginas e rotas da aplicação (Next.js App Router).
+*   `/components`: Componentes reutilizáveis (Botões, Tabelas, Dialogs).
+*   `/lib`: Configurações de banco de dados (`db.ts`), autenticação (`auth.ts`) e utilitários.
+*   `/lib/actions`: Lógica de negócio (Server Actions) para Usuários, Itens, Movimentações, etc.
+*   `/models`: Schemas do Mongoose (Banco de Dados).
+
+## 📄 Licença
+
+Desenvolvido por Vinicius Silva de Andrade (Lisboa Informática). Todos os direitos reservados.
