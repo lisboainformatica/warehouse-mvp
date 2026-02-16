@@ -7,6 +7,8 @@ import bcrypt from "bcryptjs";
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   debug: true, // Enable debug logs for Vercel
+  
+  // @ts-ignore
   trustHost: true, // Trust the host header
 
   session: {
