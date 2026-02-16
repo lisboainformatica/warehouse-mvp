@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Created README.md file in Portuguese.\nDocumented:\n- Project Overview (SaaS Warehouse MVP)\n- Key Features (Role-based Auth, Registry, Movements, Reports, PDF/Export)\n- Technology Stack (Next.js, MongoDB, etc.)\n- Installation & Setup Guide (Prerequisites, cloning, env vars, running)\n- Project Structure\n- License & Credits",
+  "updatedAt": "2026-02-15T21:18:46.865737900Z"
+}
