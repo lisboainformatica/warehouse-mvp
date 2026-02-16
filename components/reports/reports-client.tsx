@@ -1,4 +1,4 @@
-"use client";
+ï»¿"use client";
 
 import { useState } from "react";
 import { ReportFilters } from "./report-filters";
@@ -20,11 +20,11 @@ export function ReportsClient({ users, categories }: { users: any[], categories:
                 toast.error(response.error);
             } else {
                 setResults(response as any);
-                toast.success("Relatório gerado com sucesso!");
+                toast.success("RelatÃ³rio gerado com sucesso!");
             }
         } catch (error) {
             console.error("Error fetching report:", error);
-            toast.error("Ocorreu um erro ao gerar o relatório.");
+            toast.error("Ocorreu um erro ao gerar o relatÃ³rio.");
         }
     };
 
@@ -35,7 +35,7 @@ export function ReportsClient({ users, categories }: { users: any[], categories:
             {results && (
                 <>
                     <div className="hidden print:block mb-6">
-                        <h1 className="text-2xl font-bold">Relatório do Sistema de Almoxarifado</h1>
+                        <h1 className="text-2xl font-bold">RelatÃ³rio do Sistema de Almoxarifado</h1>
                         <p className="text-sm text-muted-foreground">Gerado em: {format(new Date(), "dd/MM/yyyy HH:mm")}</p>
                     </div>
                     <Card className="print:shadow-none print:border-none">
@@ -58,7 +58,7 @@ export function ReportsClient({ users, categories }: { users: any[], categories:
                                     </TableHeader>
                                     <TableBody>
                                         {results.data.length === 0 ? (
-                                            <TableRow><TableCell colSpan={7} className="text-center">Nenhum registro encontrado no período.</TableCell></TableRow>
+                                            <TableRow><TableCell colSpan={7} className="text-center">Nenhum registro encontrado no perÃ­odo.</TableCell></TableRow>
                                         ) : (
                                             results.data.map((row: any) => (
                                                 <TableRow key={row._id}>
@@ -67,7 +67,7 @@ export function ReportsClient({ users, categories }: { users: any[], categories:
                                                         {row.type === "IN" ? (
                                                             <span className="text-green-600 font-bold flex items-center"><ArrowDownLeft className="w-3 h-3 mr-1" />Entrada</span>
                                                         ) : (
-                                                            <span className="text-orange-500 font-bold flex items-center"><ArrowUpRight className="w-3 h-3 mr-1" />Saída</span>
+                                                            <span className="text-orange-500 font-bold flex items-center"><ArrowUpRight className="w-3 h-3 mr-1" />SaÃ­da</span>
                                                         )}
                                                     </TableCell>
                                                     <TableCell>{row.item?.name}</TableCell>
@@ -92,8 +92,8 @@ export function ReportsClient({ users, categories }: { users: any[], categories:
                                             <TableHead>Item</TableHead>
                                             <TableHead>Categoria</TableHead>
                                             <TableHead>Estoque Atual</TableHead>
-                                            <TableHead>Mínimo</TableHead>
-                                            <TableHead>Situação</TableHead>
+                                            <TableHead>MÃ­nimo</TableHead>
+                                            <TableHead>SituaÃ§Ã£o</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
