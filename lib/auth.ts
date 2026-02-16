@@ -6,9 +6,23 @@ import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
+  debug: true, // Enable debug logs for Vercel
+  trustHost: true, // Trust the host header
 
   session: {
     strategy: "jwt",
+  },
+
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
   },
 
   providers: [
@@ -20,32 +34,40 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
+          console.error("Missing credentials");
           throw new Error("Missing email or password");
         }
 
-        await dbConnect();
+        try {
+            await dbConnect();
 
-        const user = await User.findOne({ email: credentials.email });
+            const user = await User.findOne({ email: credentials.email });
 
-        if (!user) {
-          throw new Error("User not found");
+            if (!user) {
+              console.error("User not found:", credentials.email);
+              throw new Error("User not found");
+            }
+
+            const isValid = await bcrypt.compare(
+              credentials.password,
+              user.passwordHash
+            );
+
+            if (!isValid) {
+              console.error("Invalid password for:", credentials.email);
+              throw new Error("Invalid password");
+            }
+
+            return {
+              id: user._id.toString(),
+              name: user.name,
+              email: user.email,
+              role: user.role,
+            };
+        } catch (error) {
+            console.error("Auth error:", error);
+            throw error;
         }
-
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.passwordHash
-        );
-
-        if (!isValid) {
-          throw new Error("Invalid password");
-        }
-
-        return {
-          id: user._id.toString(),
-          name: user.name,
-          email: user.email,
-          role: user.role,
-        };
       },
     }),
   ],
